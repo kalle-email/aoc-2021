@@ -58,7 +58,7 @@ func main() {
 		num, _ := strconv.Atoi(n)
 		crabs = append(crabs, num)
 	}
-
+	// can use sort.Ints instead karl
 	sort.Slice(crabs, func(i, j int) bool { return crabs[i] < crabs[j] })
 	fmt.Printf("part1: %d \n", solvep1(crabs))
 	fmt.Printf("part2: %d \n", solvep2(crabs))
