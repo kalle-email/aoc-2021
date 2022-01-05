@@ -71,7 +71,7 @@ func getFlashing(octiGrid [][]int, alreadyFlashed map[point]bool) []point {
 }
 
 // return total flashes, which step first 100-octi-flash
-// thatis p1-answer, p2-answer
+// that is p1-answer, p2-answer
 func solve(octiGrid [][]int) (int, int) {
 	currFlashing := make([]point, 0)
 	alreadyFlashed := make(map[point]bool, 0)
@@ -90,7 +90,7 @@ func solve(octiGrid [][]int) (int, int) {
 		for len(currFlashing) > 0 { // iterate all flashing octi this step
 			currOct := currFlashing[len(currFlashing)-1] // pop new
 			currFlashing = currFlashing[:len(currFlashing)-1]
-			if i < 100 {
+			if i < 100 { // P1  ANSWER
 				totalFlashed++
 			}
 
@@ -100,7 +100,7 @@ func solve(octiGrid [][]int) (int, int) {
 				alreadyFlashed[p] = true
 			}
 		}
-		if (len(alreadyFlashed)) >= 100 {
+		if (len(alreadyFlashed)) >= 100 { // P2 ANSWER
 			allFlashStep = i + 1
 			break
 		}
