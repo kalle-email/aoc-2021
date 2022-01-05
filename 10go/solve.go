@@ -25,12 +25,11 @@ func filterIncomplete(allChunks, corrupted []string) []string {
 }
 
 // horrendous  function
-// either save all broken chars and get the first one, or have a while loop on inner loo
 func solvep1(chunks []string) (int, []string) {
 
 	corruptedChars := []string{}
 	corruptedChunks := []string{}
-	currOpen := []string{} // can reuse the same currOpen even tho its ugly
+	currOpen := []string{} // this could be causing a bug but not for my input, reusing currOpen for all lines
 
 	for _, chunk := range chunks {
 	OuterLoop:
@@ -92,7 +91,7 @@ func solvep1(chunks []string) (int, []string) {
 }
 
 // Coulduse the same solve function since incomplete lines wont close a pattern incorrectly -
-// so they can be distinguished as you iterate over them. but this is is alright aswell. p1solve which is ugly.
+// so they can be distinguished as you iterate over them. but this is is alright aswell.
 func solvep2(chunks []string) int {
 
 	allOpened := [][]string{} // bad var name
@@ -117,6 +116,7 @@ func solvep2(chunks []string) int {
 		}
 		allOpened = append(allOpened, currOpen)
 	}
+	// iterate backwards over non-closed brackets
 	for _, curr := range allOpened {
 		score := 0
 		for i := len(curr) - 1; i >= 0; i-- {

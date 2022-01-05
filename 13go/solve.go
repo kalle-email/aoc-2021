@@ -10,9 +10,9 @@ import (
 type point struct{ x, y int }
 
 func solve(grid [][]bool, instruction []point) {
-	// parsing instructions as points, x=0,y=7 --- solve down on 7
-	for insNum, i := range instruction {
-		x, y := i.x, i.y
+	// parsing instructions as points, x=0,y=7 --- fold down on 7
+	for insNum, instruction := range instruction {
+		x, y := instruction.x, instruction.y
 		nextGrid := gridCopy(grid, y, x)
 		if x == 0 { // fold down
 			for col := range nextGrid[0] {
@@ -34,7 +34,7 @@ func solve(grid [][]bool, instruction []point) {
 			}
 		}
 		grid = nextGrid
-		if insNum == 0 {
+		if insNum == 0 { // P1: how many dots after first fold
 			countDots(grid)
 		}
 	}
@@ -54,7 +54,7 @@ func gridCopy(grid [][]bool, y, x int) [][]bool { // TODO BETTER VAR NAME THAN X
 	}
 	newGrid := [][]bool{}
 	for row := 0; row < y; row++ {
-		tempRow := make([]bool, x)
+		tempRow := make([]bool, x) // row length is specified by size of slice. bit hacky but
 		copy(tempRow, grid[row][0:x])
 		newGrid = append(newGrid, tempRow)
 	}
@@ -66,7 +66,7 @@ func main() {
 	lines := strings.Split(string(input), "\n\n")
 	gridLines, folds := lines[0], lines[1]
 
-	// this parsing is a disaster just put in separate function instead
+	// this parsing is a disaster
 	// parse cordinates, save max x & y values
 	foldInstructions := []point{}
 	allCords := []point{}

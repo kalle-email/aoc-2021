@@ -36,7 +36,6 @@ func solvep2(lowPoints []point, grid [][]int) int {
 	return total
 }
 
-// akta foer om  global visited!
 func calculateBasin(grid [][]int, startRow, startCol int) int {
 	visited := make([][]bool, len(grid))
 	for i := range grid {
@@ -46,7 +45,6 @@ func calculateBasin(grid [][]int, startRow, startCol int) int {
 	basin := make([]point, 0)
 	stack = append(stack, point{startRow, startCol})
 
-	// maybe easier to read to but visitedGrid top of loop if corner case are taken in  consideration.
 	for len(stack) > 0 {
 		curr := stack[len(stack)-1]
 		stack = stack[:len(stack)-1]

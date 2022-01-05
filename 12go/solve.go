@@ -38,6 +38,9 @@ func solvep1(g map[string][]string) int {
 	return len(allPaths)
 }
 
+// p2 iterative solution :
+// when smallcave, push both regular path (no double visits) + path with this smallcave allowed twice on the stack.
+
 func solvep2(g map[string][]string) int {
 
 	queue := [][]string{{"start"}}
@@ -49,6 +52,7 @@ func solvep2(g map[string][]string) int {
 		if last == "end" {
 			allPaths = append(allPaths, path)
 		}
+
 		for _, neighbor := range g[last] {
 			if isLowerCase(neighbor) { // smallcave,
 				if !visited(path, neighbor) {
@@ -99,6 +103,7 @@ func recP1(g map[string][]string, path []string) []string {
 	return res
 }
 
+// I think this is cleaner for p2
 func p2Rec(g map[string][]string, path []string, visitedTwice bool) []string {
 
 	last := path[len(path)-1]
