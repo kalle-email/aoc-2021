@@ -69,7 +69,7 @@ object day3 {
 
   def main(args: Array[String]): Unit = {
     val input: List[String] =
-      Source.fromFile("../resources/day3.txt").getLines.toList
+      Source.fromFile("day3.txt").getLines.toList
     val binNums = for (l <- input) yield {
       (l.map(_.asDigit)).toList
     }
