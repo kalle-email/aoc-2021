@@ -46,7 +46,6 @@ func filterStraights(lines []line) []line {
 	return straight
 }
 
-//
 func solve(lines []line) int {
 
 	m := make(map[point]int) // using map to count occurences.

@@ -29,7 +29,7 @@ func (b *board) markBoard(num int) bool {
 		for col := 0; col < len(b.num[0]); col++ {
 			if b.num[row][col] == num {
 				b.marked[row][col] = true
-				if b.checkBingo(row, col) { // if bingo, return true & score
+				if b.checkBingo(row, col) {
 					return true
 				}
 			}
@@ -53,39 +53,21 @@ func (b *board) checkBingo(row, col int) bool {
 	return rowBingo || colBingo
 }
 
-// Could rewrite so both functions use the same method and just pick first / last out of order of bingo.
-func solvep1(allBoards []board, nums []int) int {
+// since p2 needs to loop through all boards regardless, solve both parts in one func.
+func solve(currBoards []board, nums []int) (int, int) {
+
+	solvedBoards := []int{} // score of solved boads
+	var b board
 	for _, num := range nums {
-		for _, b := range allBoards {
+		for i := len(currBoards) - 1; i >= 0; i-- { // iterate backwards so we can remove ezpz
+			b = currBoards[i]
 			if done := b.markBoard(num); done {
-				return b.calcScore(num)
+				solvedBoards = append(solvedBoards, b.calcScore(num))
+				currBoards = append(currBoards[:i], currBoards[i+1:]...)
 			}
 		}
 	}
-	panic("no bingo!! should not happen")
-}
-
-func solvep2(allBoards []board, nums []int) int {
-	currLastNum := -1
-	var currLastBoard board
-
-	for _, b := range allBoards {
-		if b, numsUsed := numsNeededToBingo(b, nums); numsUsed != -1 {
-			if numsUsed > currLastNum {
-				currLastBoard = b
-				currLastNum = numsUsed
-			}
-		}
-	}
-	return currLastBoard.calcScore(nums[currLastNum])
-}
-func numsNeededToBingo(b board, nums []int) (board, int) {
-	for totalNum, currNum := range nums {
-		if done := b.markBoard(currNum); done {
-			return b, totalNum
-		}
-	}
-	return b, -1
+	return solvedBoards[0], solvedBoards[len(solvedBoards)-1]
 }
 
 func main() {
@@ -114,6 +96,8 @@ func main() {
 		allBoards = append(allBoards, newBoard)
 	}
 
-	println("part1", solvep1(allBoards, nums))
-	println("part2", solvep2(allBoards, nums))
+	p1, p2 := solve(allBoards, nums)
+
+	println("part1", p1)
+	println("part2", p2)
 }

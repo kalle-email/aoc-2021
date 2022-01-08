@@ -12,6 +12,7 @@ type pair struct { // inputPairs signal and nums !
 	nums    []string
 }
 
+// could b in same func as p2, but this looks fine
 func solvep1(pairs []pair) int {
 	nums := 0
 	for _, p := range pairs {
@@ -27,8 +28,8 @@ func solvep1(pairs []pair) int {
 
 // !NOT an acutal intersect!
 
-// From strA perspective, check how many letters are not in strB. this makes this problem very simple
-// e.g strA:abcf, strBb:abcde == 2,letters : ef not found in a, (even tho total !intersect is 3)
+// From strA perspective, check how many letters are not in strB. this makes this problem very simple.
+// e.g strA:abcfg, strBb:abcde == 2,letters : fg not found in strB, (even tho total !intersect is 4, fgde)
 func numIntersection(a, b string) int {
 	notOverlapping := 0
 	for _, c := range a {
@@ -39,7 +40,7 @@ func numIntersection(a, b string) int {
 	return notOverlapping
 }
 
-// ugly helper, can rewrite this better
+// from numbers and numMap, calculate final result
 func calcNum(numStrings []string, numMap map[int]string) int {
 	strMap := make(map[string]int)
 	finalNum := 0
@@ -98,7 +99,9 @@ func solvep2(pairs []pair) int {
 	return total
 }
 
-func SortString(w string) string { // FML, thanks SO
+// sort string so they are in alphabetical order
+// fbac == abcf
+func SortString(w string) string {
 	s := strings.Split(w, "")
 	sort.Strings(s)
 	return strings.Join(s, "")
@@ -114,7 +117,7 @@ func main() {
 		p := pair{}
 
 		// just noticed that a numbers corresponding signal is not ordered in the same way jesus christ thats 2 hours gone
-		// sort string so I can pretend its a proper set ...
+		// sort string so I can pretend its a proper set ... (e.g) signal = fb  for corresponding num bf ...
 		for _, sig := range strings.Fields(split[0]) {
 			sig = SortString(sig)
 			p.signals = append(p.signals, sig)

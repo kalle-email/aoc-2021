@@ -102,6 +102,8 @@ func pqInsert(insert point, pq []point, dist map[point]int) []point {
 	return append(pq, insert)
 }
 
+// these extending methods are disgusting but its such a boring 'problem' and im too lazy to rewrite.
+//
 func getP2Board(grid [][]int) [][]int {
 
 	grid = extendDown(grid)

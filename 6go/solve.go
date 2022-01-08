@@ -9,16 +9,16 @@ import (
 
 func solve(startingFish []int, days int) int {
 	fishArray := startingFish
-	nextDay := make([]int, 9)
+	var nextDay []int
 
 	for i := 0; i < days; i++ {
+		nextDay = make([]int, 9) // prolly bad way of clearing array :- )
 		for j := 7; j >= 0; j-- {
 			nextDay[j] = fishArray[j+1]
 		}
 		nextDay[8] = fishArray[0]
 		nextDay[6] += fishArray[0]
 		fishArray = nextDay
-		nextDay = make([]int, 9) // prolly bad way of clearing array :- )
 	}
 
 	// sum it up

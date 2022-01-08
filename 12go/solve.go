@@ -150,7 +150,7 @@ func main() {
 			coolG[to] = []string{}
 		}
 		coolG[from] = append(coolG[from], to)
-		if from != "start" { // instead of handling start and ends in function ill just do this
+		if from != "start" { // to make it easy for mysself, dont add start to any neighbor list.
 			coolG[to] = append(coolG[to], from)
 		}
 	}

@@ -88,7 +88,7 @@ func main() {
 		splt := strings.Split(l, " -> ")
 		table[splt[0]] = splt[1]
 	}
-	tablePairs := make(map[string][]string) // for smarter p2 algo, create tabl that returns pairs EG  NN => B now is NN => [NB, BN]
+	tablePairs := make(map[string][]string)
 	for k, v := range table {
 		s := strings.Split(k, "")
 		concat1 := fmt.Sprintf("%s%s", s[0], v)

@@ -29,7 +29,7 @@ func solvep2(crabs []int) int {
 			dist := abs(c - target)
 			fuel := ((dist * (dist + 1)) / 2)
 			currFuelUsed += fuel
-			// could return early here if currFuel > minfuelused, nvm avg solution is the coolest regardless
+			// could stop current crab-loop if currFuel > minFuelUsed
 		}
 		if currFuelUsed < minFuelUsed {
 			minFuelUsed = currFuelUsed
