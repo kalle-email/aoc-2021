@@ -26,7 +26,6 @@ object day3 {
     )
   }
 
-  // this is so ugly, way better to just have 2 separate loops for oxy/co2 imo
   def part2_helper(
       _binNums: List[List[Int]],
       compareFunc: (Int, Int) => Boolean
